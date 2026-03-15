@@ -1,0 +1,111 @@
+{
+  "ticker": "NVDA",
+  "timestamp": "2025-03-14T10:00:00Z",
+  "options_flow": {
+    "unusual": true,
+    "sentiment_lean": "bullish",
+    "sweep_detected": true,
+    "total_unusual_premium": 4200000.0,
+    "top_contracts": [
+      {
+        "strike": 950.0,
+        "expiry": "2025-04-18",
+        "vol_oi_ratio": 4.8,
+        "type": "call"
+      },
+      {
+        "strike": 1000.0,
+        "expiry": "2025-05-16",
+        "vol_oi_ratio": 3.2,
+        "type": "call"
+      },
+      {
+        "strike": 900.0,
+        "expiry": "2025-04-18",
+        "vol_oi_ratio": 2.7,
+        "type": "call"
+      },
+      {
+        "strike": 850.0,
+        "expiry": "2025-03-28",
+        "vol_oi_ratio": 2.1,
+        "type": "put"
+      },
+      {
+        "strike": 980.0,
+        "expiry": "2025-06-20",
+        "vol_oi_ratio": 1.9,
+        "type": "call"
+      }
+    ]
+  },
+  "insider_tracker": {
+    "net_institutional_direction": "accumulating",
+    "recent_13f_changes": [
+      {
+        "fund": "Millennium Management",
+        "action": "increased",
+        "shares_delta": 1200000,
+        "filed_date": "2025-02-14"
+      },
+      {
+        "fund": "Two Sigma Investments",
+        "action": "increased",
+        "shares_delta": 850000,
+        "filed_date": "2025-02-14"
+      },
+      {
+        "fund": "Renaissance Technologies",
+        "action": "increased",
+        "shares_delta": 620000,
+        "filed_date": "2025-02-14"
+      },
+      {
+        "fund": "Citadel Advisors",
+        "action": "new position",
+        "shares_delta": 500000,
+        "filed_date": "2025-02-14"
+      }
+    ],
+    "insider_buys": [
+      {
+        "name": "Jensen Huang",
+        "role": "CEO",
+        "shares": 50000,
+        "value_usd": 47500000.0,
+        "date": "2025-01-15"
+      }
+    ],
+    "notable_funds": [
+      "Millennium Management",
+      "Two Sigma Investments",
+      "Renaissance Technologies",
+      "Citadel Advisors"
+    ]
+  },
+  "price_action": {
+    "trend": "uptrend",
+    "volume_ratio": 2.4,
+    "pct_from_52w_high": -3.2,
+    "near_resistance": true,
+    "recent_catalyst": true
+  },
+  "social_buzz_raw": {
+    "reddit_post_count_48h": 8,
+    "reddit_top_post_score": 312,
+    "reddit_top_post_flair": "Discussion",
+    "stocktwits_bull_ratio": 0.61,
+    "stocktwits_message_count": 74,
+    "headlines": [
+      "NVIDIA beats Q4 estimates, data center revenue surges",
+      "Analysts raise NVDA price targets after earnings beat",
+      "NVIDIA supply constraints ease heading into H2"
+    ],
+    "x_post_count": 18,
+    "x_bull_ratio": 0.65,
+    "x_sample_texts": [
+      "$NVDA calls printing, institutions loading quietly",
+      "Smart money accumulating $NVDA before next catalyst"
+    ]
+  }
+}

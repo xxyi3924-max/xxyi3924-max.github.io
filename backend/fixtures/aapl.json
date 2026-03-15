@@ -1,0 +1,57 @@
+{
+  "ticker": "AAPL",
+  "timestamp": "2025-03-14T10:00:00Z",
+  "options_flow": {
+    "unusual": false,
+    "sentiment_lean": "neutral",
+    "sweep_detected": false,
+    "total_unusual_premium": 0.0,
+    "top_contracts": []
+  },
+  "insider_tracker": {
+    "net_institutional_direction": "neutral",
+    "recent_13f_changes": [
+      {
+        "fund": "Berkshire Hathaway",
+        "action": "decreased",
+        "shares_delta": -10000000,
+        "filed_date": "2025-02-14"
+      },
+      {
+        "fund": "Vanguard Group",
+        "action": "increased",
+        "shares_delta": 500000,
+        "filed_date": "2025-02-14"
+      }
+    ],
+    "insider_buys": [],
+    "notable_funds": [
+      "Berkshire Hathaway",
+      "Vanguard Group"
+    ]
+  },
+  "price_action": {
+    "trend": "ranging",
+    "volume_ratio": 0.9,
+    "pct_from_52w_high": -12.1,
+    "near_resistance": false,
+    "recent_catalyst": false
+  },
+  "social_buzz_raw": {
+    "reddit_post_count_48h": 12,
+    "reddit_top_post_score": 156,
+    "reddit_top_post_flair": "Discussion",
+    "stocktwits_bull_ratio": 0.55,
+    "stocktwits_message_count": 88,
+    "headlines": [
+      "Apple Vision Pro sales disappoint analysts in first year",
+      "Apple Services revenue continues steady growth",
+      "iPhone upgrade cycle shows signs of elongation"
+    ],
+    "x_post_count": 4,
+    "x_bull_ratio": 0.5,
+    "x_sample_texts": [
+      "$AAPL ranging, nothing interesting here"
+    ]
+  }
+}

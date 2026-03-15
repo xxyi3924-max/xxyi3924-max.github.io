@@ -1,0 +1,97 @@
+{
+  "ticker": "TSLA",
+  "timestamp": "2025-03-14T10:00:00Z",
+  "options_flow": {
+    "unusual": true,
+    "sentiment_lean": "bearish",
+    "sweep_detected": true,
+    "total_unusual_premium": 3100000.0,
+    "top_contracts": [
+      {
+        "strike": 200.0,
+        "expiry": "2025-04-18",
+        "vol_oi_ratio": 5.1,
+        "type": "put"
+      },
+      {
+        "strike": 180.0,
+        "expiry": "2025-03-28",
+        "vol_oi_ratio": 4.3,
+        "type": "put"
+      },
+      {
+        "strike": 220.0,
+        "expiry": "2025-05-16",
+        "vol_oi_ratio": 2.8,
+        "type": "put"
+      },
+      {
+        "strike": 250.0,
+        "expiry": "2025-06-20",
+        "vol_oi_ratio": 1.6,
+        "type": "call"
+      },
+      {
+        "strike": 190.0,
+        "expiry": "2025-04-18",
+        "vol_oi_ratio": 1.4,
+        "type": "put"
+      }
+    ]
+  },
+  "insider_tracker": {
+    "net_institutional_direction": "distributing",
+    "recent_13f_changes": [
+      {
+        "fund": "Vanguard Group",
+        "action": "decreased",
+        "shares_delta": -2100000,
+        "filed_date": "2025-02-14"
+      },
+      {
+        "fund": "BlackRock",
+        "action": "decreased",
+        "shares_delta": -1400000,
+        "filed_date": "2025-02-14"
+      },
+      {
+        "fund": "State Street",
+        "action": "decreased",
+        "shares_delta": -900000,
+        "filed_date": "2025-02-14"
+      }
+    ],
+    "insider_buys": [],
+    "notable_funds": [
+      "Vanguard Group",
+      "BlackRock",
+      "State Street"
+    ]
+  },
+  "price_action": {
+    "trend": "downtrend",
+    "volume_ratio": 1.8,
+    "pct_from_52w_high": -38.5,
+    "near_resistance": false,
+    "recent_catalyst": true
+  },
+  "social_buzz_raw": {
+    "reddit_post_count_48h": 47,
+    "reddit_top_post_score": 2840,
+    "reddit_top_post_flair": "YOLO",
+    "stocktwits_bull_ratio": 0.44,
+    "stocktwits_message_count": 312,
+    "headlines": [
+      "Tesla deliveries miss Q1 estimates by wide margin",
+      "Elon Musk DOGE role raising concerns among Tesla investors",
+      "Tesla market share drops in Europe amid brand backlash",
+      "Short interest in TSLA reaches 18-month high"
+    ],
+    "x_post_count": 52,
+    "x_bull_ratio": 0.38,
+    "x_sample_texts": [
+      "$TSLA puts looking good, institutions distributing",
+      "Heavy put flow on $TSLA, brand headwinds continuing"
+    ]
+  }
+}
