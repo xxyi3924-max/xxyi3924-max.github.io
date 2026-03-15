@@ -58,7 +58,7 @@ React Frontend  ──SSE stream──▶  FastAPI /analyze
 | Role | Provider | Model | Purpose |
 |------|----------|-------|---------|
 | Orchestrator | Claude | `claude-sonnet-4-20250514` | Full 6-skill agentic loop, cross-signal reasoning, verdict |
-| Orchestrator | OpenAI | `gpt-4o` | Same role when `LLM_PROVIDER=openai` |
+| Orchestrator | OpenAI | `gpt-4o` | Same role when `LLM_PROVIDER=openai` (default) |
 | Orchestrator | Gemini | `gemini-2.0-flash` | Same role when `LLM_PROVIDER=gemini` |
 | Sub-agent | Claude | `claude-haiku-4-5-20251001` | Social buzz raw-data interpretation only |
 | Sub-agent | OpenAI | `gpt-4o-mini` | Same role for OpenAI provider |
@@ -131,7 +131,9 @@ The **highest-conviction signal** fires when:
 }
 ```
 **Sources:** Reddit (public JSON), StockTwits (curl_cffi Chrome impersonation for Cloudflare),
-Finviz, yfinance news (replaced X/twscrape — cookies expire too fast).
+Finviz, yfinance news.
+**X/Twitter retired:** x-client-transaction-id HMAC anti-scraping (deployed 2024) blocks all
+cookie-based approaches — Playwright, curl_cffi, and twikit all fail.
 
 ---
 
@@ -209,10 +211,12 @@ interest + P/C ratio + holder changes provide equivalent crowding detection at t
 }
 ```
 **Source:** yfinance OHLCV (30-day). FINRA TRF raw files are behind Cloudflare.
-**Absorption:** vol > 1.5x avg AND daily range < 1% = institution absorbing supply.
-**Block score:** 10-day rolling — vol > 2x avg AND price move < 1.5% = +3 pts per event.
+**Absorption:** vol > 1.5x avg AND daily range < ATR×0.6 = institution absorbing supply.
+**Block score:** 10-day rolling — vol > 2x avg AND price move < ATR×0.4 = +3 pts per event.
 **Vol/Price divergence:** volume slope positive + price slope negative = silent accumulation.
 **ATM spread:** tight near-ATM options spread = institutional liquidity present.
+**ATR-relative thresholds:** hardcoded 1% replaced with stock's own avg daily range ×0.6/0.4
+to handle volatile large-caps (NVDA avg range 2–4%).
 
 ---
 
@@ -307,11 +311,53 @@ No key needed: SEC EDGAR, StockTwits (curl_cffi), Reddit, yfinance, Finviz.
 | Source | Status | Reason |
 |--------|--------|--------|
 | Polygon.io | Retired | Options snapshot blocked on free tier |
-| X / twscrape | Retired | Cookie auth expires within hours |
+| X / Twitter | Retired | x-client-transaction-id HMAC (2024) blocks all cookie scrapers |
 | CFTC COT | Retired | All known URLs return 404 (site restructured) |
 | FINRA RegSHO | Retired | Behind Cloudflare, raw files inaccessible |
 | 13F long-only | Known gap | Shorts/derivatives invisible; Skill 5 partially compensates |
 | Dark pool proxy | Known gap | FINRA TRF inaccessible; volume absorption is behavioral proxy |
+
+---
+
+## Backtest System (Planned)
+
+The goal is to validate signal quality historically — did high-conviction signals
+actually precede price moves? This requires point-in-time historical data to avoid
+lookahead bias.
+
+### Data sources under consideration
+
+| Source | Data available | Access |
+|--------|----------------|--------|
+| Bloomberg Terminal | Full OHLCV, options chain history, 13F point-in-time, dark pool TRF prints | Pending — institutional access being arranged |
+| yfinance | OHLCV only (no historical options, no point-in-time fundamentals) | Free, already integrated |
+| EDGAR archives | Historical 13F XML filings (point-in-time) | Free, public |
+
+### Architecture sketch
+
+```
+Bloomberg BDH / BDS  ──▶  historical_data_loader.py
+    (OHLCV + options + TRF)         │
+                                    ▼
+                         backtest_runner.py
+                         for each date in range:
+                           - run all 6 skills on historical snapshot
+                           - record verdict + conviction
+                           - compare to forward return (1d, 5d, 20d)
+                                    │
+                                    ▼
+                         results/   ← CSV + JSON
+                         backtest_report.py  ← precision/recall per signal
+```
+
+### Key design constraints
+- **Point-in-time discipline:** 13F data must use the filing date, not the period end date
+  (45-day lag). Options data must use the exact expiry chain available on that date.
+- **Forward return windows:** 1-day (momentum), 5-day (swing), 20-day (position).
+- **Signal isolation:** test each skill independently before combining, to measure
+  incremental value of each layer.
+- **Bloomberg access:** if Terminal access is confirmed, use `blpapi` Python SDK.
+  Historical options chain via `BDH("NVDA US Equity", "OPT_CHAIN", start, end)`.
 
 ---
 

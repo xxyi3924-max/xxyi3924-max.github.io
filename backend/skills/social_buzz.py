@@ -10,7 +10,6 @@ from curl_cffi import requests as cf_requests
 from finvizfinance.quote import finvizfinance
 
 from prompts import SOCIAL_BUZZ_SUBAGENT_PROMPT
-from .x_scraper import fetch_x_posts
 
 REDDIT_HEADERS = {"User-Agent": "smartmoney-agent/1.0 (research tool)"}
 REDDIT_SEARCH_URL = (
@@ -60,14 +59,6 @@ def _fetch_raw(ticker: str) -> dict:
     logger.fetch("Yahoo Finance news", f"yfinance — {ticker} recent news")
     yf_post_count, yf_bull_ratio, yf_samples = _fetch_yf_news(ticker)
 
-    logger.fetch("X (Twitter)", f"Playwright scraper — ${ticker} OR #{ticker}stock")
-    x_data = fetch_x_posts(ticker)
-    if x_data["post_count"] > 0:
-        logger.found("X posts found", x_data["post_count"])
-        logger.found("X bull ratio", x_data["bull_ratio"])
-    else:
-        logger.found("X posts found", "0 (cookies missing or expired)")
-
     return {
         "reddit_post_count_48h": reddit_count,
         "reddit_top_post_score": reddit_score,
@@ -78,9 +69,6 @@ def _fetch_raw(ticker: str) -> dict:
         "yf_article_count": yf_post_count,
         "yf_bull_ratio": yf_bull_ratio,
         "yf_sample_headlines": yf_samples,
-        "x_post_count": x_data["post_count"],
-        "x_bull_ratio": x_data["bull_ratio"],
-        "x_sample_texts": x_data["sample_texts"],
     }
 
 
